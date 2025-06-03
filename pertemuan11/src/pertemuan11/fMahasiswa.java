@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author LAB F
@@ -20,27 +22,36 @@ public class fMahasiswa extends javax.swing.JFrame {
     /**
      * Creates new form fMahasiswa
      */
-    public fMahasiswa() {
+    public fMahasiswa() throws SQLException {
         initComponents();
         TM.setModel(DM);
         DM.addColumn("NIM");
         DM.addColumn("Nama Mahasiswa");
+        DM.addColumn("Alamat");
+        
+        cleartextField();
+        ListDataTable();
     }
-    
+    private void cleartextField(){
+        txNIM.setText("");
+        txNama.setText("");
+        txAlamat.setText("");
+    }
     private void ListDataTable() throws SQLException{
         Connection cnn = koneksi();
         
         DM.getDataVector().removeAllElements();
         DM.fireTableDataChanged();
         
-        if (cnn.isClosed()){
+        if (!cnn.isClosed()){
           PreparedStatement PS= cnn.prepareStatement("SELECT * FROM mhs;");
           ResultSet RS = PS.executeQuery();
           
           while(RS.next()){
-              Object[] dta = new Object[2];
+              Object[] dta = new Object[3];
               dta[0] = RS.getString("NIM");
-              dta[1] = RS.getString("NAMA");   
+              dta[1] = RS.getString("NAMA"); 
+              dta[2] = RS.getString("ALAMAT");
               
               DM.addRow(dta);
           }
@@ -58,9 +69,22 @@ public class fMahasiswa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField4 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TM = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txNIM = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        txNama = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        txAlamat = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+
+        jTextField4.setText("jTextField2");
+
+        jLabel5.setText("NIM");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -81,17 +105,52 @@ public class fMahasiswa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TM);
 
+        jLabel2.setText("Edit View Data");
+
+        txNIM.setText("NIM");
+
+        jTextField2.setText("jTextField2");
+
+        txNama.setText("Nama Mahasiswa");
+
+        jTextField3.setText("jTextField2");
+
+        txAlamat.setText("Alamat");
+
+        jTextField5.setText("jTextField2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 914, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(txNIM))
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txNama)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txAlamat)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +159,23 @@ public class fMahasiswa extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txNIM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txNama)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43)
+                .addComponent(txAlamat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,7 +211,11 @@ public class fMahasiswa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fMahasiswa().setVisible(true);
+                try {
+                    new fMahasiswa().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(fMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -144,6 +223,15 @@ public class fMahasiswa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TM;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel txAlamat;
+    private javax.swing.JLabel txNIM;
+    private javax.swing.JLabel txNama;
     // End of variables declaration//GEN-END:variables
 }
