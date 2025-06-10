@@ -8,7 +8,7 @@ package pertemuan11;
  *
  * @author LAB F
  */
-class txNAMA {
+class txNIM {
 
     static void setText(String string) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

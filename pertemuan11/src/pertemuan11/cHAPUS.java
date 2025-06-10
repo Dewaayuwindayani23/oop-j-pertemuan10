@@ -8,9 +8,9 @@ package pertemuan11;
  *
  * @author LAB F
  */
-class txNAMA {
+class cHAPUS {
 
-    static void setText(String string) {
+    static void setEnabled(boolean opsi) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
