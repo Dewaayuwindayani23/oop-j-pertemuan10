@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author LAB F
@@ -21,6 +22,7 @@ public class fMahasiswa extends javax.swing.JFrame {
     DefaultTableModel DM = new DefaultTableModel();
     /**
      * Creates new form fMahasiswa
+     * @throws java.sql.SQLException
      */
     public fMahasiswa() throws SQLException {
         initComponents();
@@ -195,6 +197,11 @@ public class fMahasiswa extends javax.swing.JFrame {
         });
 
         cTUTUP.setText("Tutup");
+        cTUTUP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTUTUPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,7 +263,7 @@ public class fMahasiswa extends javax.swing.JFrame {
                 .addComponent(txAlamat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cTUTUP, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,14 +290,23 @@ public class fMahasiswa extends javax.swing.JFrame {
     }//GEN-LAST:event_TMMouseClicked
 
     private void cHAPUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cHAPUSActionPerformed
-       String nim = txNIM.getText();
-       
+       if(cHAPUS.getText().equals("Hapus")){
+           String nim = txNIM.getText();
+           int jwb= JOptionPane.showOptionDialog(this, 
+                  "Yakin akan menghapus data NIM: "+ nim, 
+                   "konfirmasi Hapus Data", 
+                   JOptionPane.YES_NO_OPTION, 
+                   JOptionPane.ERROR_MESSAGE, 
+                   null, null, null);
+        
+           if(jwb == JOptionPane.YES_OPTION)
         try {
             destroydta (nim);
             ListDataTable();
         } catch (SQLException ex) {
             Logger.getLogger(fMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
     }//GEN-LAST:event_cHAPUSActionPerformed
 
     private void cBARUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBARUActionPerformed
@@ -344,6 +360,22 @@ public class fMahasiswa extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void cTUTUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTUTUPActionPerformed
+        if(cHAPUS.getText().equals("Hapus")){
+           String nim = txNIM.getText();
+           int jwb= JOptionPane.showOptionDialog(this, 
+                  "Yakin akan menghapus data NIM: "+ nim, 
+                   "konfirmasi Hapus Data", 
+                   JOptionPane.YES_NO_OPTION, 
+                   JOptionPane.ERROR_MESSAGE, 
+                   null, null, null);
+      
+           if(jwb == JOptionPane.YES_OPTION){
+               System.exit(0);
+           }
+        }
+    }//GEN-LAST:event_cTUTUPActionPerformed
 
     /**
      * @param args the command line arguments
